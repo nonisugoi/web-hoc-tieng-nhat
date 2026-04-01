@@ -2,19 +2,15 @@ spring:
   application:
     name: japanese-learning-web
   
-  profiles:
-    active: local
-  
   # Database Configuration (MySQL)
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/japanese_learning?createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:12345678vh}
+    url: jdbc:mysql://localhost:3306/japanese_learning?createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   
   # JPA / Hibernate Configuration
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     properties:
@@ -47,9 +43,6 @@ spring:
     port: 587
     username: YOUR_EMAIL@gmail.com
     password: YOUR_APP_PASSWORD
-    # JLRN-17: Google OAuth2 Client Configuration
-    client-id: YOUR_GOOGLE_CLIENT_ID 
-    client-secret: YOUR_GOOGLE_CLIENT_SECRET
     properties:
       mail:
         smtp:
@@ -68,9 +61,6 @@ server:
     context-path: /
     session:
       timeout: 30m
-    multipart:
-      max-file-size: 5MB
-      max-request-size: 10MB
 
 # Logging Configuration
 logging:
@@ -114,7 +104,7 @@ external-api:
     partner-code: MOMO
     request-type: captureMoMoWallet
     return-url: http://localhost:8080/payment/callback
-    notify-url: http://localhost:8080/api/payment/notify
+    notify-url: http://localhost:8080/payment/notify
 
 # Actuator Configuration (Health Check, Metrics)
 management:
